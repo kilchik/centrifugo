@@ -1571,6 +1571,7 @@ func runHTTPServers(n *centrifuge.Node, ruleContainer *rule.Container, apiExecut
 			protoSuffix = " with HTTP/3 (experimental)"
 		}
 		log.Info().Msgf("serving %s endpoints on %s%s", handlerFlags, addr, protoSuffix)
+		log.Info().Msgf("note: this is centrifugo build with both eddsa support and non-jwks verification")
 
 		server := &http.Server{
 			Addr:      addr,

@@ -452,7 +452,7 @@ func (verifier *VerifierJWT) VerifyConnectToken(t string, skipVerify bool) (Conn
 	}
 
 	if !skipVerify {
-		if verifier.jwksManager != nil {
+		if token.Header().Algorithm == jwt.EdDSA && verifier.jwksManager != nil {
 			err = verifier.verifySignatureByJWK(token, tokenVars)
 		} else {
 			err = verifier.verifySignature(token)
@@ -642,7 +642,7 @@ func (verifier *VerifierJWT) VerifySubscribeToken(t string, skipVerify bool) (Su
 	}
 
 	if !skipVerify {
-		if verifier.jwksManager != nil {
+		if token.Header().Algorithm == jwt.EdDSA && verifier.jwksManager != nil {
 			err = verifier.verifySignatureByJWK(token, tokenVars)
 		} else {
 			err = verifier.verifySignature(token)
